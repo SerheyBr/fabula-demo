@@ -79,6 +79,27 @@ document.querySelectorAll('.faq-item').forEach((el) => {
 
 // document.addEventListener('DOMContentLoaded', lazyLoadImages)
 
+//action slider toggle before after
+
+const sliderItems = document.querySelectorAll('.give-floor-item')
+if (window.innerWidth <= 1024) {
+   sliderItems.forEach((el, index) => {
+      const images = [
+         ...el.querySelector('.give-floor-item-mobil__img').children,
+      ]
+      const btnBefore = el.querySelector(`#exemple${index + 1}-before`)
+      const btnAfter = el.querySelector(`#exemple${index + 1}-after`)
+
+      console.log(btnAfter)
+      btnBefore.addEventListener('click', (e) => {
+         images[0].style.display = 'block'
+      })
+      btnAfter.addEventListener('click', (e) => {
+         images[0].style.display = 'none'
+      })
+   })
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
    //функция для разделения текста на буквы
    const splitText = (className, newClassName) => {
@@ -182,7 +203,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
       })
    }
 
-   activeitItemFromResultList()
+   ScrollTrigger.create({
+      trigger: '.result', // замени на нужный тебе селектор
+      start: 'top 70%', // когда верх секции достигнет 70% окна
+      once: true, // запустится один раз
+      // markers: true,
+      onEnter: () => {
+         activeitItemFromResultList()
+      },
+   })
 
    resultList.forEach((el, index) => {
       el.addEventListener('click', (e) => {
@@ -216,15 +245,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       tl.from(cloudsGrup, {
          x: grupStepX,
-         duration: 3,
+         duration: 2,
          ease: 'power3',
       })
       tl.from(
          cloudsGrup.children,
          {
             x: elStepX,
-            stagger: 0.2,
-            duration: 6,
+            stagger: 0.1,
+            duration: 2,
             ease: 'power3',
          },
          '<1',
@@ -242,11 +271,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       '.now-imagine-clouds__bottom-right',
    )
 
-   // animationCloudes(cloudsLeftTop, -200, -50)
-   // animationCloudes(cloudsRightTop, 250, 150)
-   // animationCloudes(cloudsLeftBottom, -300, -200)
-   // animationCloudes(cloudsRightBottom, 350, 250)
-
    const timelineCloud = gsap.timeline({
       scrollTrigger: {
          trigger: '.now-imagine',
@@ -256,7 +280,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
    timelineCloud
       .add(animationCloudes(cloudsLeftTop, -200, -50))
-      .add(animationCloudes(cloudsRightTop, 250, 150), '<0.7')
+      .add(animationCloudes(cloudsRightTop, 250, 150), '<0.1')
       .from(
          '.nom-imagine-moon',
          {
@@ -267,7 +291,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             duration: 5,
             ease: 'power3',
          },
-         '<0.9',
+         '<1',
       )
       .from(
          '.now-imagine-clouds__top-center',
@@ -278,15 +302,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             duration: 3,
             ease: 'power3',
          },
-         '<0.5',
+         '<1.1',
       )
       .add(animationCloudes(cloudsLeftBottom, -300, -200), '<0.7')
-      .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.7')
+      .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.1')
 
    //анимация звезд
    document.querySelectorAll('.nom-imagine-star').forEach((el) => {
       gsap.to(el, {
-         scale: gsap.utils.random(0, 1),
+         scale: 0.1,
          duration: gsap.utils.random(3, 5), // Разная скорость анимации
          opacity: gsap.utils.random(0.7, 1),
          repeat: -1, // Бесконечный цикл
@@ -300,66 +324,132 @@ document.addEventListener('DOMContentLoaded', (event) => {
    })
 
    //анимация projects-item
-   const list = [...document.querySelector('.projects__items').children]
+   const sectionProjects = document.querySelector('.projects__wrapper')
+   const skrollDistansProjects = 10000
+   const projectItems = document.querySelectorAll('.projects-item')
+   document.querySelector('.result').style.marginTop =
+      skrollDistansProjects + 'px'
 
-   list.forEach((el) => {
-      gsap.from(el, {
-         opacity: 0,
-         y: 100,
-         scale: 0,
-         duration: 1.5,
-         scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-         },
-      })
+   const tlProjects = gsap.timeline({
+      scrollTrigger: {
+         trigger: sectionProjects,
+         start: 'top top',
+         end: `+=${skrollDistansProjects}`,
+         pin: true,
+         scrub: 1,
+         pinSpacing: false,
+         // markers: true,
+      },
+   })
+   projectItems.forEach((el, index) => {
+      tlProjects.to(el, { y: 0 }).to(el, { y: '-100vh', opacity: 0 })
    })
 
-   gsap.to('.projects-bg__el', {
-      y: '400%', // Двигаем фон вверх (можно поменять значение для другого эффекта)
-      ease: 'none',
-      // duration: 1,
+   //анимация цифр
+   const animateCount = (element, targetValue) => {
+      const count = { value: 0 }
+
+      gsap.to(count, {
+         value: targetValue,
+         duration: 3,
+         scrollTrigger: {
+            trigger: element,
+            start: 'top center',
+            toggleActions: 'play none none none',
+         },
+         onUpdate: () => {
+            element.textContent = `${Math.round(count.value)}`
+         },
+      })
+   }
+
+   document.querySelectorAll('.we-fabula-column__title--num').forEach((el) => {
+      const targetValue = parseInt(el.getAttribute('data-target')) || 100
+
+      animateCount(el, targetValue)
+   })
+
+   //анимация секции we offer
+   const sectionOffer = document.querySelector('.offer')
+   const offerElementsInfo = document.querySelectorAll('.offer-item__info')
+   const lottieElements = document.querySelectorAll('.offer-item__img')
+   const scrollDistanceOffer = 7000
+   const nextSection = document.querySelector('.we-fabula')
+   nextSection.style.marginTop = `${scrollDistanceOffer}px`
+
+   const tlOffer = gsap.timeline({
       scrollTrigger: {
-         trigger: '.projects',
+         trigger: sectionOffer,
+         start: 'top top',
+         end: `+=${scrollDistanceOffer}`,
+         pin: true,
+         scrub: 1,
+         // markers: true,
+      },
+   })
+
+   tlOffer
+      .to(offerElementsInfo[0], { y: '0' })
+      .to(lottieElements[0], { opacity: 1 })
+      .to({}, { duration: 1 })
+      .to(lottieElements[0], { opacity: 0 })
+      .to(offerElementsInfo[0], { y: '-50vh', opacity: 0 })
+      .to(offerElementsInfo[1], { y: '0' })
+      .to(lottieElements[1], { opacity: 1 })
+      .to({}, { duration: 1 })
+      .to(lottieElements[1], { opacity: 0 })
+      .to(offerElementsInfo[1], { y: '-50vh', opacity: 0 })
+      .to(offerElementsInfo[2], { y: '0' })
+      .to(lottieElements[2], { opacity: 1 })
+      .to({}, { duration: 1 })
+      .to(lottieElements[2], { opacity: 0 })
+      .to(offerElementsInfo[2], { y: '-50vh', opacity: 0 })
+
+   // console.log(window.innerWidth)
+   // if (window.innerWidth >= 1024) {
+   //    tlOffer
+   //       .from(offerElements[0], { y: '100vh' })
+   //       .to(lottieElements[0], { opacity: 1 })
+   //       .to({}, { duration: 1 })
+   //       .to(lottieElements[0], { opacity: 0 })
+   //       .to(offerElements[0], { y: '-50vh', opacity: 0 })
+   //       .to(offerElements[1], { y: '-100vh' })
+   //       .to(lottieElements[1], { opacity: 1 })
+   //       .to({}, { duration: 1 })
+   //       .to(lottieElements[1], { opacity: 0 })
+   //       .to(offerElements[1], { y: '-150vh', opacity: 0 })
+   //       .to(offerElements[2], { y: '-200vh' })
+   //       .to(lottieElements[2], { opacity: 1 })
+   //       .to({}, { duration: 1 })
+   //       .to(lottieElements[2], { opacity: 0 })
+   //       .to(offerElements[2], { y: '-250vh', opacity: 0 })
+   // }else{
+
+   // }
+
+   //footer анимация
+   const footerBg = document.querySelector('.footer__bg')
+   const footer = document.querySelector('.footer')
+
+   gsap.from(footerBg, {
+      y: 0,
+      // scale: 0,
+      duration: 2,
+      scrollTrigger: {
+         trigger: footer,
          start: 'top bottom',
-         end: 'bottom top',
-         scrub: 2, // Связь со скроллом (чем больше, тем плавнее)
       },
    })
 })
 
 //проверка работы слайдера
-// const swiper = new Swiper('.slider-customers__slider', {
-//    slidesPerView: 9,
-//    spaceBetween: 0,
-//    loop: true,
-//    speed: 5000,
-//    allowTouchMove: false,
-
-//    autoplay: {
-//       delay: 0,
-//       disableOnInteraction: false,
-//    },
-//    freeMode: {
-//       enabled: true,
-//       momentum: false,
-//    },
-//    breakpoints: {
-//       340: {
-//          speed: 500,
-//       },
-//       768: {
-//          speed: 1500,
-//       },
-//       1024: {
-//          speed: 9000,
-//       },
-//    },
-// })
 
 const swiper4 = new Swiper('.give-floor-slider', {
    slidesPerView: 1,
+   loopedSlides: 1,
+   centeredSlides: true,
    spaceBetween: 0,
+   loop: true,
    pagination: {
       el: '.give-floor-slider-pagination',
       clickable: true,
