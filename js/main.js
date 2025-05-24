@@ -1,29 +1,3 @@
-// alert(window.innerHeight + 'px')
-
-// const baseWidth = 1920
-
-const baseWidth = 1920
-const baseFontSize = 16
-
-const calculationVw = (px) => {
-   const res = (px / baseWidth) * 100
-   return +res.toFixed(4)
-}
-const calculationRem = (px) => {
-   const res = px / baseFontSize
-   return +res.toFixed(4)
-}
-
-const clampFonts = (min, max, text = '') => {
-   const res = `clamp(${calculationRem(min)}rem, ${calculationVw(max)}vw, ${calculationRem(max)}rem) - font size`
-   console.log(res, text)
-}
-
-const clampSizesBlock = (min, max, text = '') => {
-   const res = `clamp(${min}px, ${calculationVw(max)}vw, ${max}px) - size box`
-   console.log(res, text)
-}
-
 // accordeon action
 document.querySelectorAll('.faq-item').forEach((el) => {
    el.querySelector('.faq-item__trigger').addEventListener('click', (e) => {
@@ -40,45 +14,6 @@ document.querySelectorAll('.faq-item').forEach((el) => {
    })
 })
 
-//ленивая подгрузка картинок
-// function lazyLoadImages() {
-//    const images = document.querySelectorAll('img[data-src]')
-
-//    if ('IntersectionObserver' in window) {
-//       const observer = new IntersectionObserver(
-//          (entries, observer) => {
-//             console.log(entries)
-//             console.log(observer)
-//             entries.forEach((entry) => {
-//                if (entry.isIntersecting) {
-//                   console.log('true')
-//                   const img = entry.target
-//                   img.src = img.getAttribute('data-src')
-//                   img.removeAttribute('data-src')
-//                   img.classList.add('loaded') // можно сделать fade-in в CSS
-//                   observer.unobserve(img)
-//                }
-//             })
-//          },
-//          {
-//             rootMargin: '0px 0px 200px 0px', // предварительная подгрузка
-//             threshold: 0.1,
-//          },
-//       )
-//       console.log(images)
-//       images.forEach((img) => observer.observe(img))
-//    } else {
-//       // Fallback для старых браузеров
-//       images.forEach((img) => {
-//          img.src = img.getAttribute('data-src')
-//          img.removeAttribute('data-src')
-//       })
-//       console.log('asdasd')
-//    }
-// }
-
-// document.addEventListener('DOMContentLoaded', lazyLoadImages)
-
 //action slider toggle before after
 
 const sliderItems = document.querySelectorAll('.give-floor-item')
@@ -90,7 +25,7 @@ if (window.innerWidth <= 1024) {
       const btnBefore = el.querySelector(`#exemple${index + 1}-before`)
       const btnAfter = el.querySelector(`#exemple${index + 1}-after`)
 
-      console.log(btnAfter)
+      // console.log(btnAfter)
       btnBefore.addEventListener('click', (e) => {
          images[0].style.display = 'block'
       })
@@ -150,7 +85,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document
                .querySelector('.hero-contact-us')
                .classList.remove('sticky'),
-         markers: false, // Поставь true, если хочешь видеть триггеры на экране
+         // markers: false,
       },
    })
 
@@ -325,7 +260,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
    //анимация projects-item
    const sectionProjects = document.querySelector('.projects__wrapper')
-   const skrollDistansProjects = 10000
+   const skrollDistansProjects = 6000
    const projectItems = document.querySelectorAll('.projects-item')
    document.querySelector('.result').style.marginTop =
       skrollDistansProjects + 'px'
@@ -342,8 +277,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
       },
    })
    projectItems.forEach((el, index) => {
-      tlProjects.to(el, { y: 0 }).to(el, { y: '-100vh', opacity: 0 })
+      tlProjects.to(el, { y: '-100vh' }, '-=0.41')
    })
+
+   // const secProjects = document.querySelector('.projects')
+   // const triggerSecProg = secProjects.querySelector('.projects__wrapper')
+   // const listrSecProg = secProjects.querySelector('.projects__items')
+   // const heightListProg = listrSecProg.clientHeight
+   // const scrollDistanceProj = 3000
+   // const actionTranslateY = heightListProg + window.innerHeight / 3
+   // secProjects.style.marginBottom = `${scrollDistanceProj}px`
+   // listrSecProg.style.transform = `translateY(${window.innerHeight}px)`
+   // console.log(heightListProg)
+   // const tlProjects = gsap.timeline({
+   //    scrollTrigger: {
+   //       trigger: triggerSecProg,
+   //       start: 'top top',
+   //       end: `+=${scrollDistanceProj}`,
+   //       pin: true,
+   //       scrub: 1,
+   //       pinSpacing: false,
+   //       // markers: true,
+   //    },
+   // })
+
+   // tlProjects.to(listrSecProg, { y: -actionTranslateY })
 
    //анимация цифр
    const animateCount = (element, targetValue) => {
@@ -373,7 +331,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
    const sectionOffer = document.querySelector('.offer')
    const offerElementsInfo = document.querySelectorAll('.offer-item__info')
    const lottieElements = document.querySelectorAll('.offer-item__img')
-   const scrollDistanceOffer = 7000
+   const scrollDistanceOffer = 4500
    const nextSection = document.querySelector('.we-fabula')
    nextSection.style.marginTop = `${scrollDistanceOffer}px`
 
@@ -389,8 +347,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
    })
 
    tlOffer
-      .to(offerElementsInfo[0], { y: '0' })
-      .to(lottieElements[0], { opacity: 1 })
+      // .to(offerElementsInfo[0], { y: '0' })
+      // .to(lottieElements[0], { opacity: 1 })
       .to({}, { duration: 1 })
       .to(lottieElements[0], { opacity: 0 })
       .to(offerElementsInfo[0], { y: '-50vh', opacity: 0 })
