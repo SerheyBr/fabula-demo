@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
    //блюр в с рандомной задержкой
    document.querySelectorAll('.we-know__list-item').forEach((el) => {
       gsap.to(el, {
-         filter: () => `blur(${gsap.utils.random(0, 8)}px)`,
+         // filter: () => `blur(${gsap.utils.random(0, 8)}px)`,
          duration: gsap.utils.random(2, 5), // Разная скорость анимации
          repeat: -1, // Бесконечный цикл
          yoyo: true, // Возвращение к изначальному значению
@@ -273,11 +273,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
          pin: true,
          scrub: 1,
          pinSpacing: false,
-         // markers: true,
+         markers: true,
       },
    })
-   projectItems.forEach((el, index) => {
-      tlProjects.to(el, { y: '-100vh' }, '-=0.41')
+   projectItems.forEach((el, index, arr) => {
+      // tlProjects.to(el, { y: '-100vh' }, '-=0.41')
+      tlProjects.to(el, { y: '-100%' }, '-=0.3')
+      // tlProjects.to(el, { y: '-100%' })
    })
 
    // const secProjects = document.querySelector('.projects')
@@ -343,12 +345,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
          pin: true,
          scrub: 1,
          // markers: true,
+         // onLeave: () => {
+         //    // Запуск второй анимации после скролла первой
+         //    gsap.to(offerElementsInfo[2], { y: '-50vh', opacity: 0 })
+         // },
+         // onEnterBack: () => {
+         //    // Запуск второй анимации после скролла первой
+         //    gsap.to(offerElementsInfo[2], { y: '0', opacity: 1 })
+         // },
       },
    })
 
    tlOffer
-      // .to(offerElementsInfo[0], { y: '0' })
-      // .to(lottieElements[0], { opacity: 1 })
       .to({}, { duration: 1 })
       .to(lottieElements[0], { opacity: 0 })
       .to(offerElementsInfo[0], { y: '-50vh', opacity: 0 })
@@ -361,29 +369,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .to(lottieElements[2], { opacity: 1 })
       .to({}, { duration: 1 })
       .to(lottieElements[2], { opacity: 0 })
-      .to(offerElementsInfo[2], { y: '-50vh', opacity: 0 })
-
-   // console.log(window.innerWidth)
-   // if (window.innerWidth >= 1024) {
-   //    tlOffer
-   //       .from(offerElements[0], { y: '100vh' })
-   //       .to(lottieElements[0], { opacity: 1 })
-   //       .to({}, { duration: 1 })
-   //       .to(lottieElements[0], { opacity: 0 })
-   //       .to(offerElements[0], { y: '-50vh', opacity: 0 })
-   //       .to(offerElements[1], { y: '-100vh' })
-   //       .to(lottieElements[1], { opacity: 1 })
-   //       .to({}, { duration: 1 })
-   //       .to(lottieElements[1], { opacity: 0 })
-   //       .to(offerElements[1], { y: '-150vh', opacity: 0 })
-   //       .to(offerElements[2], { y: '-200vh' })
-   //       .to(lottieElements[2], { opacity: 1 })
-   //       .to({}, { duration: 1 })
-   //       .to(lottieElements[2], { opacity: 0 })
-   //       .to(offerElements[2], { y: '-250vh', opacity: 0 })
-   // }else{
-
-   // }
+      .to(offerElementsInfo[2], { y: '-30vh', opacity: 0.1 })
 
    //footer анимация
    const footerBg = document.querySelector('.footer__bg')

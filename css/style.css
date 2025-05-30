@@ -487,11 +487,11 @@ body {
 .hero::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: -5%;
   left: 0;
   z-index: -1;
   width: 100%;
-  height: 60vh;
+  height: 100vh;
   background-image: url("../assets/img/Mask group.svg");
   background-position: center;
   background-size: cover;
@@ -940,8 +940,6 @@ body {
   display: -ms-flexbox;
   display: flex;
   white-space: nowrap;
-  -webkit-animation: ribbon-list 60s linear infinite;
-  animation: ribbon-list 60s linear infinite;
 }
 .ribbons__list-item {
   font-family: var(--second-family);
@@ -954,6 +952,8 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-animation: ribbon-list 50s linear infinite;
+  animation: ribbon-list 50s linear infinite;
 }
 .ribbons__list-item span {
   display: block;
@@ -971,23 +971,23 @@ body {
 
 @-webkit-keyframes ribbon-list {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
   100% {
-    -webkit-transform: translateX(-40%);
-    transform: translateX(-40%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
   }
 }
 
 @keyframes ribbon-list {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
   100% {
-    -webkit-transform: translateX(-40%);
-    transform: translateX(-40%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
   }
 }
 .we-know {
@@ -996,7 +996,7 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 95vh;
   border-radius: 100%;
   position: relative;
   margin-bottom: 180px;
@@ -1093,6 +1093,8 @@ body {
 }
 .we-know__list-item:nth-child(2) {
   font-size: clamp(1.0625rem, 3.2227vw, 2.0625rem);
+  -webkit-filter: blur(13.8000001907px);
+  filter: blur(13.8000001907px);
   top: 18%;
   right: 23%;
 }
@@ -1108,6 +1110,8 @@ body {
 }
 .we-know__list-item:nth-child(5) {
   font-size: clamp(0.75rem, 2.3438vw, 1.5rem);
+  -webkit-filter: blur(5.8000001907px);
+  filter: blur(5.8000001907px);
   top: 56%;
   right: 11%;
 }
@@ -1118,6 +1122,8 @@ body {
 }
 .we-know__list-item:nth-child(7) {
   font-size: clamp(0.9375rem, 3.0273vw, 1.9375rem);
+  -webkit-filter: blur(13.3000001907px);
+  filter: blur(13.3000001907px);
   bottom: 8%;
   right: 13%;
 }
@@ -1133,6 +1139,8 @@ body {
 }
 .we-know__list-item:nth-child(10) {
   font-size: clamp(0.75rem, 2.3438vw, 1.5rem);
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
   bottom: 11%;
   left: 21%;
 }
@@ -1143,8 +1151,11 @@ body {
 }
 .we-know__list-item:nth-child(12) {
   font-size: clamp(0.875rem, 2.6367vw, 1.6875rem);
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
   bottom: 41%;
   left: 13%;
+  display: none;
 }
 .we-know__list-item:nth-child(13) {
   font-size: clamp(0.75rem, 2.3438vw, 1.5rem);
@@ -1629,6 +1640,9 @@ body {
   }
 }
 
+.solution {
+  margin-top: 40vh;
+}
 .solution__wrapper {
   width: 100%;
   height: 100vh;
@@ -1669,6 +1683,9 @@ body {
   color: rgba(142, 142, 142, 0.537254902);
 }
 @media (max-width: 1024px) {
+  .solution {
+    margin-top: 12vh;
+  }
   .solution__wrapper {
     height: 70vh;
   }
@@ -1900,6 +1917,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   height: 100%;
   width: 50%;
   background: -webkit-gradient(linear, right top, left top, from(rgba(22, 4, 42, 0)), to(#16042a));
@@ -1909,6 +1927,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
   height: 100%;
   width: 50%;
   background: -webkit-gradient(linear, right top, left top, from(rgba(22, 4, 42, 0)), to(#16042a));
@@ -1955,6 +1974,7 @@ body {
 }
 .slider-customers-slider {
   overflow: hidden;
+  position: relative;
 }
 .slider-customers-slider__wrapper {
   display: -webkit-box;
@@ -1963,22 +1983,16 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-animation: slider-customers-slider 30s linear infinite;
-  animation: slider-customers-slider 30s linear infinite;
 }
 .slider-customers-slider__big-slide {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-animation: slider-customers-slider 10s linear infinite;
+  animation: slider-customers-slider 10s linear infinite;
 }
 .slider-customers-slider__slide {
   min-width: 245px;
-}
-@media (max-width: 1024px) {
-  .slider-customers-slider__wrapper {
-    -webkit-animation: slider-customers-slider 10s linear infinite;
-    animation: slider-customers-slider 10s linear infinite;
-  }
 }
 @media (max-width: 550px) {
   .slider-customers-slider__slide {
@@ -1988,23 +2002,23 @@ body {
 
 @-webkit-keyframes slider-customers-slider {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
   100% {
-    -webkit-transform: translateX(-80%);
-    transform: translateX(-80%);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
 @keyframes slider-customers-slider {
   0% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
   100% {
-    -webkit-transform: translateX(-80%);
-    transform: translateX(-80%);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
 }
 .offer {
@@ -2055,6 +2069,8 @@ body {
 }
 .offer__title {
   text-align: center;
+  position: relative;
+  top: 100px;
 }
 .offer__body {
   position: relative;
@@ -2119,8 +2135,11 @@ body {
 }
 .offer-item__img {
   width: clamp(315px, 100%, 745px);
-  height: 540px;
   opacity: 0;
+}
+.offer-item__img img {
+  width: 100%;
+  height: 100%;
 }
 @media (max-width: 1024px) {
   .offer-item {
@@ -2764,10 +2783,12 @@ body {
 .projects-bg__blur--big-1 {
   bottom: 14%;
   left: 0;
+  display: none;
 }
 .projects-bg__blur--big-2 {
   bottom: 3%;
   right: 0;
+  display: none;
 }
 .projects-bg__blur--small-1 {
   bottom: 21%;
