@@ -35,6 +35,12 @@ if (window.innerWidth <= 1024) {
    })
 }
 
+// расчет высоты фиксированной кнопки и padding-bottom у секции активности кнопки
+const contactUsBtn = document.querySelector('.hero-contact-us')
+const contactUsBtnScrollZone = document.querySelector('.btn-scroll')
+const contactUsBtnHeight = contactUsBtn.clientHeight
+contactUsBtnScrollZone.style.paddingBottom = `${contactUsBtnHeight + 20}px`
+
 document.addEventListener('DOMContentLoaded', (event) => {
    //функция для разделения текста на буквы
    const splitText = (className, newClassName) => {
@@ -53,7 +59,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
    splitText('.now-imagine__text', 'now-imagine__text--letter')
    splitText('.solution__text', 'solution__text--letter')
 
-   //анимируем плавное заполнение текста
+   // //анимируем плавное заполнение текста
    gsap.to('.now-imagine__text--letter', {
       color: '#FFFFFF', // Меняем цвет на яркий
       stagger: 0.03, // Поочередное появление букв
@@ -77,15 +83,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
    gsap.to('.hero-contact-us', {
       scrollTrigger: {
          trigger: '.btn-scroll', // Когда доскроллим до этого блока
-         start: 'bottom bottom', // Когда верхняя часть блока достигнет центра экрана
-         end: 'top top',
+         start: 'bottom 98%', // Когда верхняя часть блока достигнет центра экрана
+         // end: 'top top',
+         scrub: 1,
          onEnter: () =>
             document.querySelector('.hero-contact-us').classList.add('sticky'),
          onLeaveBack: () =>
             document
                .querySelector('.hero-contact-us')
                .classList.remove('sticky'),
-         // markers: false,
+         // markers: true,
       },
    })
 
@@ -273,7 +280,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
          pin: true,
          scrub: 1,
          pinSpacing: false,
-         markers: true,
+         // markers: true,
       },
    })
    projectItems.forEach((el, index, arr) => {
