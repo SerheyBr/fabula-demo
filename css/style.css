@@ -1663,7 +1663,7 @@ body {
   transform: translate(-50%, -100%);
   width: 80vw;
   height: clamp(192px, 28vw, 480px);
-  background-image: url("/assets/img/rope.svg");
+  background-image: url("../assets/img/rope.svg");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: contain;
@@ -1683,7 +1683,7 @@ body {
 }
 @media (max-width: 700px) {
   .now-imagine-blob__rope {
-    background-image: url("/assets/img/rope-mobil.svg");
+    background-image: url("../assets/img/rope-mobil.svg");
   }
 }
 
@@ -4159,7 +4159,7 @@ body {
   position: relative;
   overflow: hidden;
   padding: 145px 20px;
-  background-image: url("/assets/img/bg-leave-request.png");
+  background-image: url("../assets/img/bg-leave-request.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -4335,7 +4335,7 @@ body {
   .leave-request__box {
     padding: 100px 20px;
     margin-bottom: 100px;
-    background-image: url("/assets/img/bg-leave-request-mobil.png");
+    background-image: url("../assets/img/bg-leave-request-mobil.png");
   }
   .leave-request__subtitle {
     display: none;
