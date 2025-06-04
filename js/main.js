@@ -80,36 +80,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
    })
 
    //липкая кнопка .hero-contact-us
-   gsap.to('.hero-contact-us', {
-      scrollTrigger: {
-         trigger: '.btn-scroll', // Когда доскроллим до этого блока
-         start: 'bottom 98%', // Когда верхняя часть блока достигнет центра экрана
-         // end: 'top top',
-         scrub: 1,
-         onEnter: () =>
-            document.querySelector('.hero-contact-us').classList.add('sticky'),
-         onLeaveBack: () =>
-            document
-               .querySelector('.hero-contact-us')
-               .classList.remove('sticky'),
-         // markers: true,
-      },
-   })
-
-   //блюр в с рандомной задержкой
-   document.querySelectorAll('.we-know__list-item').forEach((el) => {
-      gsap.to(el, {
-         // filter: () => `blur(${gsap.utils.random(0, 8)}px)`,
-         duration: gsap.utils.random(2, 5), // Разная скорость анимации
-         repeat: -1, // Бесконечный цикл
-         yoyo: true, // Возвращение к изначальному значению
-         stagger: {
-            // Рандомное время старта для каждого элемента
-            each: gsap.utils.random(0, 1),
-            repeatRefresh: true, // Генерирует новое значение для каждого повтора
+   if (window.innerWidth > 485) {
+      gsap.to('.hero-contact-us', {
+         scrollTrigger: {
+            trigger: '.btn-scroll', // Когда доскроллим до этого блока
+            start: 'bottom 98%', // Когда верхняя часть блока достигнет центра экрана
+            // end: 'top top',
+            scrub: 1,
+            onEnter: () =>
+               document
+                  .querySelector('.hero-contact-us')
+                  .classList.add('sticky'),
+            onLeaveBack: () =>
+               document
+                  .querySelector('.hero-contact-us')
+                  .classList.remove('sticky'),
+            // markers: true,
          },
       })
-   })
+   }
+
+   //блюр в с рандомной задержкой
+   // document.querySelectorAll('.we-know__list-item').forEach((el) => {
+   //    gsap.to(el, {
+   //       filter: () => `blur(${gsap.utils.random(0, 8)}px)`,
+   //       duration: gsap.utils.random(2, 5), // Разная скорость анимации
+   //       repeat: -1, // Бесконечный цикл
+   //       yoyo: true, // Возвращение к изначальному значению
+   //       stagger: {
+   //          // Рандомное время старта для каждого элемента
+   //          each: gsap.utils.random(0, 1),
+   //          repeatRefresh: true, // Генерирует новое значение для каждого повтора
+   //       },
+   //    })
+   // })
 
    //запуск анимации заполнения круговой индикатор прогресса
    gsap.from('.circle-progres', {
@@ -164,16 +168,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
    //анимация мушек
    function moveRandomly(spot) {
       gsap.to(spot, {
-         x: `+=${gsap.utils.random(-100, 100)}`, // Случайное смещение по X
-         y: `+=${gsap.utils.random(-100, 100)}`, // Случайное смещение по Y
-         rotation: gsap.utils.random(-180, 180), // Случайный поворот
-         duration: gsap.utils.random(5, 10), // Случайная скорость
+         x: `+=${Math.floor(gsap.utils.random(-90, 90))}`, // Случайное смещение по X
+         y: `+=${Math.floor(gsap.utils.random(-90, 90))}`, // Случайное смещение по Y
+         // rotation: gsap.utils.random(-180, 180), // Случайный поворот
+         duration: Math.floor(gsap.utils.random(1, 5)), // Случайная скорость
          ease: 'power1.inOut',
          onComplete: () => moveRandomly(spot), // Повторяем движение с новыми параметрами
       })
    }
    const arraySpot = [
-      ...document.querySelectorAll('.projects-bg__el'),
+      ...document.querySelectorAll('.projects-bg__el--animation'),
       ...document.querySelectorAll('.hero__bg-crcl'),
    ]
 
@@ -249,6 +253,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .add(animationCloudes(cloudsLeftBottom, -300, -200), '<0.7')
       .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.1')
 
+   ////анимация облаков START TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+
+   ////анимация облаков END TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+
    //анимация звезд
    document.querySelectorAll('.nom-imagine-star').forEach((el) => {
       gsap.to(el, {
@@ -266,51 +274,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
    })
 
    //анимация projects-item
-   const sectionProjects = document.querySelector('.projects__wrapper')
-   const skrollDistansProjects = 6000
-   const projectItems = document.querySelectorAll('.projects-item')
-   document.querySelector('.result').style.marginTop =
-      skrollDistansProjects + 'px'
+   if (window.innerWidth > 485) {
+      console.log(window.innerWidth)
+      const sectionProjects = document.querySelector('.projects__wrapper')
+      const skrollDistansProjects = 6000
+      const projectItems = document.querySelectorAll('.projects-item')
+      document.querySelector('.result').style.marginTop =
+         skrollDistansProjects + 'px'
 
-   const tlProjects = gsap.timeline({
-      scrollTrigger: {
-         trigger: sectionProjects,
-         start: 'top top',
-         end: `+=${skrollDistansProjects}`,
-         pin: true,
-         scrub: 1,
-         pinSpacing: false,
-         // markers: true,
-      },
-   })
-   projectItems.forEach((el, index, arr) => {
-      // tlProjects.to(el, { y: '-100vh' }, '-=0.41')
-      tlProjects.to(el, { y: '-100%' }, '-=0.3')
-      // tlProjects.to(el, { y: '-100%' })
-   })
-
-   // const secProjects = document.querySelector('.projects')
-   // const triggerSecProg = secProjects.querySelector('.projects__wrapper')
-   // const listrSecProg = secProjects.querySelector('.projects__items')
-   // const heightListProg = listrSecProg.clientHeight
-   // const scrollDistanceProj = 3000
-   // const actionTranslateY = heightListProg + window.innerHeight / 3
-   // secProjects.style.marginBottom = `${scrollDistanceProj}px`
-   // listrSecProg.style.transform = `translateY(${window.innerHeight}px)`
-   // console.log(heightListProg)
-   // const tlProjects = gsap.timeline({
-   //    scrollTrigger: {
-   //       trigger: triggerSecProg,
-   //       start: 'top top',
-   //       end: `+=${scrollDistanceProj}`,
-   //       pin: true,
-   //       scrub: 1,
-   //       pinSpacing: false,
-   //       // markers: true,
-   //    },
-   // })
-
-   // tlProjects.to(listrSecProg, { y: -actionTranslateY })
+      const tlProjects = gsap.timeline({
+         scrollTrigger: {
+            trigger: sectionProjects,
+            start: 'top top',
+            end: `+=${skrollDistansProjects}`,
+            pin: true,
+            scrub: 1,
+            pinSpacing: false,
+            // markers: true,
+         },
+      })
+      projectItems.forEach((el, index, arr) => {
+         // tlProjects.to(el, { y: '-100vh' }, '-=0.41')
+         tlProjects.to(el, { y: '-100%' }, '-=0.3')
+         // tlProjects.to(el, { y: '-100%' })
+      })
+   }
 
    //анимация цифр
    const animateCount = (element, targetValue) => {
@@ -337,46 +325,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
    })
 
    //анимация секции we offer
-   const sectionOffer = document.querySelector('.offer')
-   const offerElementsInfo = document.querySelectorAll('.offer-item__info')
-   const lottieElements = document.querySelectorAll('.offer-item__img')
-   const scrollDistanceOffer = 4500
-   const nextSection = document.querySelector('.we-fabula')
-   nextSection.style.marginTop = `${scrollDistanceOffer}px`
+   if (window.innerWidth > 485) {
+      const sectionOffer = document.querySelector('.offer')
+      const offerElementsInfo = document.querySelectorAll('.offer-item__info')
+      const lottieElements = document.querySelectorAll('.offer-item__img')
+      const scrollDistanceOffer = 4500
+      const nextSection = document.querySelector('.we-fabula')
+      nextSection.style.marginTop = `${scrollDistanceOffer}px`
 
-   const tlOffer = gsap.timeline({
-      scrollTrigger: {
-         trigger: sectionOffer,
-         start: 'top top',
-         end: `+=${scrollDistanceOffer}`,
-         pin: true,
-         scrub: 1,
-         // markers: true,
-         // onLeave: () => {
-         //    // Запуск второй анимации после скролла первой
-         //    gsap.to(offerElementsInfo[2], { y: '-50vh', opacity: 0 })
-         // },
-         // onEnterBack: () => {
-         //    // Запуск второй анимации после скролла первой
-         //    gsap.to(offerElementsInfo[2], { y: '0', opacity: 1 })
-         // },
-      },
-   })
+      const tlOffer = gsap.timeline({
+         scrollTrigger: {
+            trigger: sectionOffer,
+            start: 'top top',
+            end: `+=${scrollDistanceOffer}`,
+            pin: true,
+            scrub: 1,
+         },
+      })
 
-   tlOffer
-      .to({}, { duration: 1 })
-      .to(lottieElements[0], { opacity: 0 })
-      .to(offerElementsInfo[0], { y: '-50vh', opacity: 0 })
-      .to(offerElementsInfo[1], { y: '0' })
-      .to(lottieElements[1], { opacity: 1 })
-      .to({}, { duration: 1 })
-      .to(lottieElements[1], { opacity: 0 })
-      .to(offerElementsInfo[1], { y: '-50vh', opacity: 0 })
-      .to(offerElementsInfo[2], { y: '0' })
-      .to(lottieElements[2], { opacity: 1 })
-      .to({}, { duration: 1 })
-      .to(lottieElements[2], { opacity: 0 })
-      .to(offerElementsInfo[2], { y: '-30vh', opacity: 0.1 })
+      tlOffer
+         .to({}, { duration: 1 })
+         .to(lottieElements[0], { opacity: 0 })
+         .to(offerElementsInfo[0], { y: '-50vh', opacity: 0 })
+         .to(offerElementsInfo[1], { y: '0' })
+         .to(lottieElements[1], { opacity: 1 })
+         .to({}, { duration: 1 })
+         .to(lottieElements[1], { opacity: 0 })
+         .to(offerElementsInfo[1], { y: '-50vh', opacity: 0 })
+         .to(offerElementsInfo[2], { y: '0' })
+         .to(lottieElements[2], { opacity: 1 })
+         .to({}, { duration: 1 })
+         .to(lottieElements[2], { opacity: 0 })
+         .to(offerElementsInfo[2], { y: '-30vh', opacity: 0.1 })
+   }
 
    //footer анимация
    const footerBg = document.querySelector('.footer__bg')
