@@ -42,6 +42,65 @@ const contactUsBtnHeight = contactUsBtn.clientHeight
 contactUsBtnScrollZone.style.paddingBottom = `${contactUsBtnHeight + 20}px`
 
 document.addEventListener('DOMContentLoaded', (event) => {
+   //анимация курсора на hero
+   // const cursorTl = gsap.timeline({})
+   // cursorTl
+   //    .from('.hero__code', {
+   //       scale: 0,
+   //       opacity: 0,
+   //       delay: 1,
+   //       duration: 1,
+   //       ease: 'bounce',
+   //    })
+   //    .from('.hero__cursor', {
+   //       // scale: 0,
+   //       opacity: 0,
+   //       x: '200px',
+   //       y: '200px',
+   //       delay: 1,
+   //       duration: 1.5,
+   //       ease: 'sine.inOut',
+   //    })
+   //    .from('.hero__cursor-title', {
+   //       // scale: 0,
+   //       opacity: 0,
+   //       duration: 1,
+   //    })
+
+   //анимация тайтла на hero
+   // const titleAnimationTl = gsap.timeline({})
+
+   // titleAnimationTl
+   //    // .from('.hero__title--top-word', {
+   //    //    x: '-1000px',
+   //    //    duration: 0.5,
+   //    //    delay: 1,
+   //    //    // ease: 'bounce',
+   //    // })
+   //    .from('.hero__title--circle-right', {
+   //       y: '-1000px',
+   //       rotate: '-180',
+   //       duration: 2,
+   //       delay: 1,
+   //       ease: 'bounce',
+   //    })
+   //    .from(
+   //       '.hero__title--circle-left',
+   //       {
+   //          y: '-1000px',
+   //          rotate: '-320',
+   //          duration: 2,
+   //          ease: 'bounce',
+   //       },
+   //       '<0.5',
+   //    )
+   //    .from('.hero__title--continued', {
+   //       // y: '-1000px',
+   //       rotate: '0',
+   //       duration: 0.5,
+   //       ease: 'bounce',
+   //    })
+
    //функция для разделения текста на буквы
    const splitText = (className, newClassName) => {
       let textElement = document.querySelector(className)
@@ -115,7 +174,78 @@ document.addEventListener('DOMContentLoaded', (event) => {
    //    })
    // })
 
-   //запуск анимации заполнения круговой индикатор прогресса
+   //анимация секции с мозгом
+   const zippersLeftTl = gsap.timeline({
+      repeat: -1,
+   })
+   const zippersRightTl = gsap.timeline({
+      repeat: -1,
+   })
+   zippersLeftTl
+      .to('.we-know__zipper--left', {
+         x: '-10px',
+         y: '-10px',
+         duration: 3,
+      })
+      .to('.we-know__zipper--left', {
+         rotate: -37,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--left', {
+         rotate: -33,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--left', {
+         rotate: -37,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--left', {
+         rotate: -33,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--left', {
+         rotate: -35,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--left', {
+         x: '0',
+         y: '0',
+         duration: 0.2,
+      })
+
+   zippersRightTl
+      .to('.we-know__zipper--right', {
+         x: '10px',
+         y: '-10px',
+         duration: 3,
+      })
+      .to('.we-know__zipper--right', {
+         rotate: 37,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--right', {
+         rotate: 33,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--right', {
+         rotate: 37,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--right', {
+         rotate: 33,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--right', {
+         rotate: 35,
+         duration: 0.1,
+      })
+      .to('.we-know__zipper--right', {
+         x: '0',
+         y: '0',
+         duration: 0.2,
+      })
+
+   //запуск анимации заполнения круговой индикатор прогресса в секции you need
    gsap.from('.circle-progres', {
       strokeDashoffset: '511.82px',
 
@@ -126,6 +256,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
          toggleActions: 'play',
       },
    })
+   //анимация плашки в секции you need
+   // gsap.from('.you-need-facts__title', {
+   //    y: '20px',
+   //    duration: 1,
+   //    rotate: '0',
+   //    yoyo: true,
+   //    scrollTrigger: {
+   //       trigger: '.circle-progres',
+   //       start: 'top bottom',
+   //    },
+   // })
 
    //анимация списка с заполнением кружков
    const resultList = document.querySelectorAll('.result-item')
@@ -185,75 +326,147 @@ document.addEventListener('DOMContentLoaded', (event) => {
    arraySpot.forEach((spot) => moveRandomly(spot))
 
    //анимация облаков
-   document.querySelectorAll('nom-imagine-star')
-   const animationCloudes = (cloudsGrup, grupStepX, elStepX) => {
-      const tl = gsap.timeline()
+   // document.querySelectorAll('nom-imagine-star')
+   // const animationCloudes = (cloudsGrup, grupStepX, elStepX) => {
+   //    const tl = gsap.timeline()
 
-      tl.from(cloudsGrup, {
-         x: grupStepX,
-         duration: 2,
-         ease: 'power3',
-      })
-      tl.from(
-         cloudsGrup.children,
-         {
-            x: elStepX,
-            stagger: 0.1,
-            duration: 2,
-            ease: 'power3',
-         },
-         '<1',
-      )
-      return tl
-   }
-   const cloudsLeftTop = document.querySelector('.now-imagine-clouds__top-left')
-   const cloudsRightTop = document.querySelector(
-      '.now-imagine-clouds__top-right',
-   )
-   const cloudsLeftBottom = document.querySelector(
-      '.now-imagine-clouds__bottom-left',
-   )
-   const cloudsRightBottom = document.querySelector(
-      '.now-imagine-clouds__bottom-right',
-   )
+   //    tl.from(cloudsGrup, {
+   //       x: grupStepX,
+   //       duration: 2,
+   //       ease: 'power3',
+   //    })
+   //    tl.from(
+   //       cloudsGrup.children,
+   //       {
+   //          x: elStepX,
+   //          stagger: 0.1,
+   //          duration: 2,
+   //          ease: 'power3',
+   //       },
+   //       '<1',
+   //    )
+   //    return tl
+   // }
+   // const cloudsLeftTop = document.querySelector('.now-imagine-clouds__top-left')
+   // const cloudsRightTop = document.querySelector(
+   //    '.now-imagine-clouds__top-right',
+   // )
+   // const cloudsLeftBottom = document.querySelector(
+   //    '.now-imagine-clouds__bottom-left',
+   // )
+   // const cloudsRightBottom = document.querySelector(
+   //    '.now-imagine-clouds__bottom-right',
+   // )
 
-   const timelineCloud = gsap.timeline({
+   // const timelineCloud = gsap.timeline({
+   //    scrollTrigger: {
+   //       trigger: '.now-imagine',
+   //       start: 'top center',
+   //    },
+   // })
+
+   // timelineCloud
+   //    .add(animationCloudes(cloudsLeftTop, -200, -50))
+   //    .add(animationCloudes(cloudsRightTop, 250, 150), '<0.1')
+   //    .from(
+   //       '.nom-imagine-moon',
+   //       {
+   //          x: -100,
+   //          opacity: 0,
+   //          scale: 0.8,
+   //          rotate: 20,
+   //          duration: 5,
+   //          ease: 'power3',
+   //       },
+   //       '<1',
+   //    )
+   //    .from(
+   //       '.now-imagine-clouds__top-center',
+   //       {
+   //          x: 100,
+   //          opacity: 0.7,
+   //          scale: 0.8,
+   //          duration: 3,
+   //          ease: 'power3',
+   //       },
+   //       '<1.1',
+   //    )
+   //    .add(animationCloudes(cloudsLeftBottom, -300, -200), '<0.7')
+   //    .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.1')
+
+   ////анимация облаков START TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+   gsap.from('.nom-imagine-moon', {
+      x: -100,
+      opacity: 0.3,
+      scale: 0.8,
+      rotate: 20,
+      duration: 7,
+      ease: 'power3',
       scrollTrigger: {
          trigger: '.now-imagine',
          start: 'top center',
       },
    })
-
-   timelineCloud
-      .add(animationCloudes(cloudsLeftTop, -200, -50))
-      .add(animationCloudes(cloudsRightTop, 250, 150), '<0.1')
-      .from(
-         '.nom-imagine-moon',
-         {
-            x: -100,
-            opacity: 0,
-            scale: 0.8,
-            rotate: 20,
-            duration: 5,
-            ease: 'power3',
-         },
-         '<1',
-      )
-      .from(
-         '.now-imagine-clouds__top-center',
-         {
-            x: 100,
-            opacity: 0.7,
-            scale: 0.8,
-            duration: 3,
-            ease: 'power3',
-         },
-         '<1.1',
-      )
-      .add(animationCloudes(cloudsLeftBottom, -300, -200), '<0.7')
-      .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.1')
-
-   ////анимация облаков START TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
+   gsap.from('.now-imagine-clouds__top-center', {
+      x: 100,
+      opacity: 0.7,
+      scale: 0.8,
+      duration: 5,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
+   gsap.from('.now-imagine-clouds__top-left', {
+      x: '-100%',
+      y: '-50px',
+      scale: 0,
+      duration: 5,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
+   gsap.from('.now-imagine-clouds__top-right', {
+      x: '+100%',
+      y: '+50px',
+      scale: 0,
+      duration: 5,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
+   gsap.from('.now-imagine-clouds__bottom-left', {
+      x: '-100%',
+      duration: 3,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
+   gsap.from('.now-imagine-clouds__bottom-right', {
+      x: '+100%',
+      duration: 3,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
+   gsap.from('.now-imagine-clouds__bottom-center', {
+      x: '-200%',
+      duration: 7,
+      ease: 'power3',
+      scrollTrigger: {
+         trigger: '.now-imagine',
+         start: 'top center',
+      },
+   })
 
    ////анимация облаков END TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
 
@@ -373,6 +586,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
       },
    })
 })
+
+//анимация плашки в секции achieving-goal
+// gsap.from('.achieving-goal__wrapper', {
+//    y: '-10%',
+//    duration: 1,
+//    // yoyo: true,
+//    scrollTrigger: {
+//       trigger: '.we-fabula',
+//       start: '90% bottom',
+//       // markers: true,
+//    },
+// })
 
 //проверка работы слайдера
 
