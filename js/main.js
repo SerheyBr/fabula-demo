@@ -68,38 +68,47 @@ document.addEventListener('DOMContentLoaded', (event) => {
    //    })
 
    //анимация тайтла на hero
-   // const titleAnimationTl = gsap.timeline({})
+   gsap.to('.hero__title--circle-right', {
+      repeat: -1,
+      // y: '-1000px',
+      rotate: '360',
+      duration: 5,
+      ease: 'none',
+      // delay: 1,
+      // ease: 'bounce',
+   })
+   const titleAnimationTl = gsap.timeline({})
 
-   // titleAnimationTl
-   //    // .from('.hero__title--top-word', {
-   //    //    x: '-1000px',
-   //    //    duration: 0.5,
-   //    //    delay: 1,
-   //    //    // ease: 'bounce',
-   //    // })
-   //    .from('.hero__title--circle-right', {
+   titleAnimationTl
+   // .from('.hero__title--top-word', {
+   //    x: '-1000px',
+   //    duration: 0.5,
+   //    delay: 1,
+   //    // ease: 'bounce',
+   // })
+   // .from('.hero__title--circle-right', {
+   //    y: '-1000px',
+   //    rotate: '-180',
+   //    duration: 2,
+   //    delay: 1,
+   //    ease: 'bounce',
+   // })
+   // .from(
+   //    '.hero__title--circle-left',
+   //    {
    //       y: '-1000px',
-   //       rotate: '-180',
+   //       rotate: '-320',
    //       duration: 2,
-   //       delay: 1,
    //       ease: 'bounce',
-   //    })
-   //    .from(
-   //       '.hero__title--circle-left',
-   //       {
-   //          y: '-1000px',
-   //          rotate: '-320',
-   //          duration: 2,
-   //          ease: 'bounce',
-   //       },
-   //       '<0.5',
-   //    )
-   //    .from('.hero__title--continued', {
-   //       // y: '-1000px',
-   //       rotate: '0',
-   //       duration: 0.5,
-   //       ease: 'bounce',
-   //    })
+   //    },
+   //    '<0.5',
+   // )
+   // .from('.hero__title--continued', {
+   //    // y: '-1000px',
+   //    rotate: '0',
+   //    duration: 0.5,
+   //    ease: 'bounce',
+   // })
 
    //функция для разделения текста на буквы
    const splitText = (className, newClassName) => {
@@ -257,16 +266,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
       },
    })
    //анимация плашки в секции you need
-   // gsap.from('.you-need-facts__title', {
-   //    y: '20px',
-   //    duration: 1,
-   //    rotate: '0',
-   //    yoyo: true,
-   //    scrollTrigger: {
-   //       trigger: '.circle-progres',
-   //       start: 'top bottom',
-   //    },
-   // })
+   gsap.from('.you-need-facts__title', {
+      y: '20px',
+      duration: 1,
+      rotate: '0',
+      yoyo: true,
+      scrollTrigger: {
+         trigger: '.circle-progres',
+         start: 'top bottom',
+      },
+   })
 
    //анимация списка с заполнением кружков
    const resultList = document.querySelectorAll('.result-item')
@@ -295,6 +304,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       start: 'top 70%', // когда верх секции достигнет 70% окна
       once: true, // запустится один раз
       // markers: true,
+      // delay: 1,
       onEnter: () => {
          activeitItemFromResultList()
       },
@@ -542,7 +552,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const sectionOffer = document.querySelector('.offer')
       const offerElementsInfo = document.querySelectorAll('.offer-item__info')
       const lottieElements = document.querySelectorAll('.offer-item__img')
-      const scrollDistanceOffer = 4500
+      const scrollDistanceOffer = 3000
       const nextSection = document.querySelector('.we-fabula')
       nextSection.style.marginTop = `${scrollDistanceOffer}px`
 
