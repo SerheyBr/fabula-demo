@@ -1082,7 +1082,7 @@ body {
   left: 20px;
   width: 34px;
   height: 82px;
-  background-image: url("../assets/img/lighthing.svg");
+  background-image: url("../assets/img/we-know/lighthing.svg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1096,7 +1096,7 @@ body {
   right: 25px;
   width: 34px;
   height: 82px;
-  background-image: url("../assets/img/lighthing.svg");
+  background-image: url("../assets/img/we-know/lighthing.svg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -3121,6 +3121,9 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   margin-right: 20px;
+}
+.result__info-content {
+  margin-top: auto;
 }
 .result__title {
   font-family: var(--font3-2);

@@ -279,6 +279,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
    //анимация списка с заполнением кружков
    const resultList = document.querySelectorAll('.result-item')
+   const imgSection = document.querySelector('.result__img > img')
    let currentAnimationResultList
 
    const activeitItemFromResultList = (index = 0) => {
@@ -293,6 +294,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
          index = 0
       }
       resultList[index].classList.add('active')
+
+      const imgSrcEl = resultList[index].querySelector(
+         '.result-item__img--mobil > img',
+      ).src
+
+      imgSection.src = imgSrcEl
 
       currentAnimationResultList = gsap.delayedCall(6, () => {
          activeitItemFromResultList(index + 1)
@@ -336,75 +343,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
    arraySpot.forEach((spot) => moveRandomly(spot))
 
    //анимация облаков
-   // document.querySelectorAll('nom-imagine-star')
-   // const animationCloudes = (cloudsGrup, grupStepX, elStepX) => {
-   //    const tl = gsap.timeline()
-
-   //    tl.from(cloudsGrup, {
-   //       x: grupStepX,
-   //       duration: 2,
-   //       ease: 'power3',
-   //    })
-   //    tl.from(
-   //       cloudsGrup.children,
-   //       {
-   //          x: elStepX,
-   //          stagger: 0.1,
-   //          duration: 2,
-   //          ease: 'power3',
-   //       },
-   //       '<1',
-   //    )
-   //    return tl
-   // }
-   // const cloudsLeftTop = document.querySelector('.now-imagine-clouds__top-left')
-   // const cloudsRightTop = document.querySelector(
-   //    '.now-imagine-clouds__top-right',
-   // )
-   // const cloudsLeftBottom = document.querySelector(
-   //    '.now-imagine-clouds__bottom-left',
-   // )
-   // const cloudsRightBottom = document.querySelector(
-   //    '.now-imagine-clouds__bottom-right',
-   // )
-
-   // const timelineCloud = gsap.timeline({
-   //    scrollTrigger: {
-   //       trigger: '.now-imagine',
-   //       start: 'top center',
-   //    },
-   // })
-
-   // timelineCloud
-   //    .add(animationCloudes(cloudsLeftTop, -200, -50))
-   //    .add(animationCloudes(cloudsRightTop, 250, 150), '<0.1')
-   //    .from(
-   //       '.nom-imagine-moon',
-   //       {
-   //          x: -100,
-   //          opacity: 0,
-   //          scale: 0.8,
-   //          rotate: 20,
-   //          duration: 5,
-   //          ease: 'power3',
-   //       },
-   //       '<1',
-   //    )
-   //    .from(
-   //       '.now-imagine-clouds__top-center',
-   //       {
-   //          x: 100,
-   //          opacity: 0.7,
-   //          scale: 0.8,
-   //          duration: 3,
-   //          ease: 'power3',
-   //       },
-   //       '<1.1',
-   //    )
-   //    .add(animationCloudes(cloudsLeftBottom, -300, -200), '<0.7')
-   //    .add(animationCloudes(cloudsRightBottom, 350, 250), '<0.1')
-
-   ////анимация облаков START TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
    gsap.from('.nom-imagine-moon', {
       x: -100,
       opacity: 0.3,
@@ -478,12 +416,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
       },
    })
 
-   ////анимация облаков END TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
-
    //анимация звезд
    document.querySelectorAll('.nom-imagine-star').forEach((el) => {
       gsap.to(el, {
-         scale: 0.1,
+         scale: 0.2,
          duration: gsap.utils.random(3, 5), // Разная скорость анимации
          opacity: gsap.utils.random(0.7, 1),
          repeat: -1, // Бесконечный цикл
@@ -595,19 +531,48 @@ document.addEventListener('DOMContentLoaded', (event) => {
          start: 'top bottom',
       },
    })
-})
 
-//анимация плашки в секции achieving-goal
-// gsap.from('.achieving-goal__wrapper', {
-//    y: '-10%',
-//    duration: 1,
-//    // yoyo: true,
-//    scrollTrigger: {
-//       trigger: '.we-fabula',
-//       start: '90% bottom',
-//       // markers: true,
-//    },
-// })
+   //анимация плашки в секции while-thinking
+   const whileThinkingTl = gsap.timeline({
+      scrollTrigger: {
+         trigger: '.while-thinking',
+         start: 'center bottom',
+      },
+   })
+   whileThinkingTl
+      .from('.while-thinking-decor__bottom-left', {
+         scale: 0,
+         opacity: 0,
+         duration: 1.3,
+      })
+      .from(
+         '.while-thinking-decor__top-right',
+         {
+            scale: 0,
+            opacity: 0,
+            duration: 1.3,
+         },
+         '-=1',
+      )
+      .from(
+         '.while-thinking-decor__top-left',
+         {
+            scale: 0,
+            opacity: 0,
+            duration: 1.3,
+         },
+         '-=1',
+      )
+      .from(
+         '.while-thinking-decor__bottom-right',
+         {
+            scale: 0,
+            opacity: 0,
+            duration: 1.3,
+         },
+         '-=1',
+      )
+})
 
 //проверка работы слайдера
 
